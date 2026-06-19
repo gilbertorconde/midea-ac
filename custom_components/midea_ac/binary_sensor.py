@@ -32,7 +32,15 @@ async def async_setup_entry(
 
     # Create entities for supported features
     entities = []
-    if hasattr(device, "filter_alert") and getattr(device, "supports_filter_reminder", False):
+    # Filter alert is reported in every state response (payload[13] & 0x20), so a
+    # device that returns a concrete value has the sensor regardless of whether it
+    # advertises the B5 FILTER_REMIND capability. Many units expose the status (and
+    # show it in the app) without setting that capability bit, which previously left
+    # the entity uncreated and stuck "unavailable". Fall back to the data presence.
+    if hasattr(device, "filter_alert") and (
+        getattr(device, "supports_filter_reminder", False)
+        or getattr(device, "filter_alert", None) is not None
+    ):
         entities.append(MideaBinarySensor(coordinator,
                                           "filter_alert",
                                           BinarySensorDeviceClass.PROBLEM,

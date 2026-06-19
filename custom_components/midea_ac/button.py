@@ -38,14 +38,17 @@ async def async_setup_entry(
                                     ))
 
     # Filter run-time resets. These are classic-protocol maintenance actions
-    # that aren't reliably advertised via capabilities, so they're created
-    # disabled-by-default and gated on a best-effort support signal.
-    if hasattr(device, "reset_filter") and getattr(device, "supports_filter_reminder", False):
+    # that aren't reliably advertised via capabilities, so they're gated on a
+    # best-effort support signal. Mirror the filter_alert sensor: also accept
+    # devices that simply report filter data.
+    if hasattr(device, "reset_filter") and (
+        getattr(device, "supports_filter_reminder", False)
+        or getattr(device, "filter_alert", None) is not None
+    ):
         entities.append(MideaButton(coordinator,
                                     "reset_filter",
                                     "reset_filter",
                                     entity_category=EntityCategory.CONFIG,
-                                    enabled_default=False,
                                     ))
 
     if hasattr(device, "reset_fresh_air_filter") and getattr(device, "supports_fresh_air", False):
@@ -53,7 +56,6 @@ async def async_setup_entry(
                                     "reset_fresh_air_filter",
                                     "reset_fresh_air_filter",
                                     entity_category=EntityCategory.CONFIG,
-                                    enabled_default=False,
                                     ))
     add_entities(entities)
 

@@ -57,6 +57,7 @@
     },
     "abort": {
       "already_configured": "The device has already been configured.",
+      "already_configured_devices_found": "No new devices found on the network.\n\nAlready configured on this network:\n{devices}",
       "cannot_connect": "Device connection could not be made.",
       "cloud_connection_failed": "Cloud connection could not be made.",
       "no_devices_found": "No supported devices found on the network.",
@@ -74,6 +75,7 @@
       "init": {
         "description": "Advanced integration settings.",
         "data": {
+          "update_interval": "Update Interval",
           "prompt_tone": "Enable Beep",
           "temp_step": "Temperature Step",
           "fan_speed_step": "Fan Speed Step",
@@ -83,6 +85,7 @@
           "merge_capability_overrides": "Merge Overrides"
         },
         "data_description": {
+          "update_interval": "How often to poll the device for state updates (1-30 seconds)",
           "temp_step": "Step size for temperature set point",
           "fan_speed_step": "Step size for custom fan speeds",
           "max_connection_lifetime": "Maximum time in seconds a connection will be used (15 second minimum)",
@@ -173,7 +176,7 @@
           },
           "preset_mode": {
             "state": {
-              "ieco": "iECO",
+              "ieco": "iECO / ECOMaster",
               "silent": "Silent"
             }
           },
@@ -209,6 +212,9 @@
       },
       "child_sleep": {
         "name": "Child sleep"
+      },
+      "water_pump": {
+        "name": "Water pump"
       }
     },
     "button": {
@@ -220,6 +226,11 @@
       },
       "reset_fresh_air_filter": {
         "name": "Reset fresh air filter"
+      }
+    },
+    "fan": {
+      "fresh_air": {
+        "name": "Fresh air"
       }
     },
     "number": {
@@ -320,8 +331,29 @@
       }
     },
     "sensor": {
+      "compressor_current": {
+        "name": "Compressor current"
+      },
+      "compressor_frequency": {
+        "name": "Compressor frequency"
+      },
+      "compressor_voltage": {
+        "name": "Compressor voltage"
+      },
       "current_energy_usage": {
         "name": "Current energy"
+      },
+      "discharge_pipe_temperature": {
+        "name": "Discharge pipe temperature"
+      },
+      "horizontal_louvers_angle": {
+        "name": "Horizontal louvers angle"
+      },
+      "indoor_coil_temperature": {
+        "name": "Indoor coil temperature"
+      },
+      "indoor_fan_speed": {
+        "name": "Indoor fan speed"
       },
       "indoor_humidity": {
         "name": "Indoor humidity"
@@ -329,17 +361,32 @@
       "indoor_temperature": {
         "name": "Indoor temperature"
       },
+      "outdoor_coil_temperature": {
+        "name": "Outdoor coil temperature"
+      },
       "outdoor_fan_speed": {
         "name": "Outdoor fan speed"
       },
       "outdoor_temperature": {
         "name": "Outdoor temperature"
       },
+      "outdoor_unit_power": {
+        "name": "Outdoor unit power"
+      },
       "real_time_power_usage": {
         "name": "Power"
       },
+      "target_compressor_frequency": {
+        "name": "Target compressor frequency"
+      },
+      "target_indoor_fan_speed": {
+        "name": "Target indoor fan speed"
+      },
       "total_energy_usage": {
         "name": "Total energy"
+      },
+      "vertical_louvers_angle": {
+        "name": "Vertical louvers angle"
       }
     },
     "switch": {
@@ -355,8 +402,8 @@
       "display": {
         "name": "Display"
       },
-      "flash_cool": {
-        "name": "Flash cool"
+      "flash": {
+        "name": "Flash"
       },
       "out_silent": {
         "name": "Outdoor silent mode"

@@ -12,7 +12,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
 from .coordinator import (MideaCoordinatorEntity, MideaDeviceUpdateCoordinator,
-                          MideaGroup5Entity)
+                          MideaGroup2Entity, MideaGroup5Entity)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -84,6 +84,12 @@ async def async_setup_entry(
                                               enabled_default=False,
                                               ))
 
+    if hasattr(device, "water_pump_running") and hasattr(device, "enable_group2_data_requests"):
+        entities.append(MideaGroup2BinarySensor(coordinator,
+                                                "water_pump_running",
+                                                BinarySensorDeviceClass.RUNNING,
+                                                "water_pump",
+                                                ))
     add_entities(entities)
 
 
@@ -151,4 +157,17 @@ class MideaGroup5BinarySensor(MideaBinarySensor, MideaGroup5Entity):
         MideaBinarySensor.__init__(self, *args, **kwargs)
 
         # Group5 sensors start disabled in case device doesn't support them
+        self._attr_entity_registry_enabled_default = False
+
+
+class MideaGroup2BinarySensor(MideaBinarySensor, MideaGroup2Entity):
+    """Binary sensor for Midea AC group 2 data (indoor unit)."""
+
+    def __init__(self,
+                 *args,
+                 **kwargs
+                 ) -> None:
+        MideaBinarySensor.__init__(self, *args, **kwargs)
+
+        # Group 2 sensors start disabled in case device doesn't support them
         self._attr_entity_registry_enabled_default = False

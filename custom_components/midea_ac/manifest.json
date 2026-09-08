@@ -16,5 +16,5 @@
     "msmart-ng @ git+https://github.com/gilbertorconde/midea-msmart.git@main",
     "pyyaml"
   ],
-  "version": "2026.4.0"
+  "version": "2026.9.0"
 }
